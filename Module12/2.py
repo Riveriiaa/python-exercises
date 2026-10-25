@@ -1,9 +1,13 @@
 import json
+import os
 from urllib.parse import urlencode
 from urllib.request import urlopen
 from urllib.error import HTTPError, URLError
 
-API_KEY = "bf2bdc5f409f7362316174e5ecd29935"
+API_KEY = os.environ.get("OPENWEATHER_API_KEY")
+
+if not API_KEY:
+    raise SystemExit("Set OPENWEATHER_API_KEY before running this exercise.")
 
 paikkakunta = input("Anna paikkakunnan nimi: ").strip()
 

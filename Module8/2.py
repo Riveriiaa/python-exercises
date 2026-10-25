@@ -1,13 +1,14 @@
+import os
 import mysql.connector
 
 
 def get_airports_by_country(country_code):
     connection = mysql.connector.connect(
-        host="localhost",
-        port=3306,
-        database="flight_game",
-        user="root",
-        password="password",
+        host=os.environ.get("DB_HOST", "127.0.0.1"),
+        port=int(os.environ.get("DB_PORT", "3306")),
+        database=os.environ.get("DB_NAME", "flight_game"),
+        user=os.environ.get("DB_USER", "root"),
+        password=os.environ["DB_PASSWORD"],
         autocommit=True
     )
 

@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 import mysql.connector
 
@@ -5,11 +6,11 @@ app = Flask(__name__)
 
 def hae_lentokentta(icao):
     yhteys = mysql.connector.connect(
-        host="127.0.0.1",
-        port=3306,
-        database="flight_game",
-        user="root",
-        password=""
+        host=os.environ.get("DB_HOST", "127.0.0.1"),
+        port=int(os.environ.get("DB_PORT", "3306")),
+        database=os.environ.get("DB_NAME", "flight_game"),
+        user=os.environ.get("DB_USER", "root"),
+        password=os.environ["DB_PASSWORD"]
     )
 
     kursori = yhteys.cursor(dictionary=True)
